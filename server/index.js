@@ -7,6 +7,8 @@ app.use(cors());
 const dotenv = require("dotenv");
 dotenv.config();
 const MongoDB = process.env.MONGO_DB;
+const Port = process.env.PORT;
+
 const auth = require("./routes/auth");
 const product = require("./routes/products");
 const comment = require("./routes/comments");
