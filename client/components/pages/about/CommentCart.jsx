@@ -24,13 +24,13 @@ export default function CommentCart({ data }) {
       >
         <img
           style={{ height: "30px", width: "30px", borderRadius: "50%" }}
-          src={data.image.url}
+          src={data?.image?.url}
           alt="productImg"
         />
-        <Typography>{data.title}</Typography>
+        <Typography>{data?.title}</Typography>
       </Box>
       <Rating name="read-only" value={3} size="small" readOnly />
-      <Typography fontSize="small">{data.title}</Typography>
+      <Typography fontSize="small">{data?.title}</Typography>
     </Stack>
   );
 }

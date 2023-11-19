@@ -41,3 +41,11 @@ exports.getProduct = async (req, res, next) => {
     next(error);
   }
 };
+exports.getProductByID = async (req, res, next) => {
+  try {
+    const particularProducts = await Product.findById(req.params.id);
+    res.status(200).json({ status: "ok", data: particularProducts });
+  } catch (error) {
+    next(error);
+  }
+};

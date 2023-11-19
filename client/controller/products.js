@@ -36,3 +36,21 @@ export const getAllProducts = async () => {
     console.log(error);
   }
 };
+export const getProductByID = async (id) => {
+  try {
+    const response = await fetch(
+      `http://localhost:4000/product/getProducts/${id}`,
+      {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
+    console.log(response.data, "Particular Product");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
