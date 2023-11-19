@@ -10,22 +10,88 @@ import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
+import LoginModal from "@/components/pages/auth/LoginModal";
+import Cookies from "js-cookie";
+import { createComment, getComments } from "@/controller/comment";
+import toast, { Toaster } from "react-hot-toast";
+import { getAllUser } from "@/controller/auth";
 
 export default function About() {
+  const data = Cookies.get("userData");
+  const userData = data ? JSON.parse(data) : null;
   const [product, setproduct] = useState({});
+  const [comments, setcomments] = useState([]);
+  const [allUsers, setallUsers] = useState([]);
   const router = useRouter();
   useEffect(() => {
     if (router?.query.id) {
       getProductByID(router?.query.id).then((res) => {
         setproduct(res);
+        if (res) {
+          getComments(res?._id).then((data) => setcomments(data));
+        }
       });
     }
+    getAllUser().then((data) => {
+      if (data) {
+        setallUsers(data);
+      }
+    });
   }, [router?.query.id]);
+  // console.log(allUsers, "Comments");
   const commentArray = ["Excellent", "Good", "Not bad", "Poor"];
-  const [commentField, setcommentField] = useState("");
-  const [rating, setrating] = useState(0);
+
+  const [commentDatas, setcommentDatas] = useState({
+    rating: 0,
+    comment: "",
+    userId: "",
+    productId: "",
+  });
+  const [open, setopen] = useState(false);
+  const handleOpenLoginModal = () => {
+    setopen(true);
+  };
+  const handleonChange = (event) => {
+    const { name, value } = event.target;
+    setcommentDatas({ ...commentDatas, [name]: value });
+  };
+  const [disableRating, setdisableRating] = useState(true);
+  const handleSubmit = () => {
+    setcommentDatas({
+      rating: commentDatas.rating,
+      comment: commentDatas.comment,
+      userId: userData?._id,
+      productId: product?._id,
+    });
+    if (!userData) {
+      handleOpenLoginModal();
+    } else {
+      if (
+        commentDatas.rating &&
+        commentDatas.comment &&
+        commentDatas.userId &&
+        commentDatas.productId
+      ) {
+        createComment(commentDatas);
+        getComments();
+      } else {
+        toast.error("All fields are mandatory");
+        console.log(commentDatas, "CommentDatas");
+      }
+    }
+  };
+  const userPicMap = new Map(allUsers.map((pic) => [pic._id, pic.image.url]));
+  const userNameMap = new Map(allUsers.map((pic) => [pic._id, pic.uname]));
+  const commentsWithPics = comments.map((comment) => ({
+    ...comment,
+    image: userPicMap.get(comment.userId),
+    name: userNameMap.get(comment.userId),
+  }));
+
   return (
     <Layout>
+      <Toaster />
+      <LoginModal open={open} close={setopen} />
       <Stack
         direction={"row"}
         sx={{ width: "100%", justifyContent: "space-between", padding: "10px" }}
@@ -56,26 +122,28 @@ export default function About() {
             <Stack>
               <Typography fontSize="small">Rate this product</Typography>
               <Rating
-                name="simple-controlled"
-                value={rating}
-                onChange={(event) => {
-                  setrating(event.target.value);
-                }}
+                name="rating"
+                value={parseInt(commentDatas.rating, 10)}
+                onChange={handleonChange}
               />
             </Stack>
-            <Button size="small" variant="outlined">
-              Post
-            </Button>
+            {commentDatas.rating > 0 && (
+              <Button onClick={handleSubmit} size="small" variant="outlined">
+                Post
+              </Button>
+            )}
           </Box>
-          <TextField
-            value={commentField ? commentField : ""}
-            size="small"
-            placeholder="Describe your experience"
-            onChange={(e) => {
-              setcommentField(e.target.value);
-            }}
-          />
+          {commentDatas.rating > 0 && (
+            <TextField
+              value={commentDatas.comment}
+              size="small"
+              placeholder="Describe your experience"
+              onChange={handleonChange}
+              name="comment"
+            />
+          )}
           <Box
+            hidden={commentDatas.rating == 0}
             sx={{
               width: "100%",
               display: "flex",
@@ -88,7 +156,7 @@ export default function About() {
               return (
                 <Button
                   onClick={() => {
-                    setcommentField(item);
+                    setcommentDatas({ ...commentDatas, comment: item });
                   }}
                   key={item}
                   sx={{
@@ -104,7 +172,9 @@ export default function About() {
               );
             })}
           </Box>
-          <CommentCart data={product} />;
+          {commentsWithPics?.map((data) => {
+            return <CommentCart key={data._id} data={data} />;
+          })}
         </Box>
       </Stack>
     </Layout>

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-export const createProducts = async (data) => {
+export const createComment = async (data) => {
   try {
     const response = await fetch(
       "http://localhost:4000/comment/createComment",
@@ -21,16 +21,20 @@ export const createProducts = async (data) => {
     console.log(error);
   }
 };
-export const getAllProducts = async () => {
+export const getComments = async (productID) => {
   try {
-    const response = await fetch("http://localhost:4000/comment/getComments", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
-    console.log(response.data, "AllProduct");
+    const response = await fetch(
+      `http://localhost:4000/comment/getComments/${productID}`,
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    ).then((res) => res.json());
+    console.log(response.data, "AllComments");
     return response.data;
   } catch (error) {
     console.log(error);

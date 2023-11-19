@@ -16,3 +16,14 @@ exports.createComment = async (req, res, next) => {
     next(error);
   }
 };
+exports.getComment = async (req, res, next) => {
+  try {
+    const Comments = await Comment.find({});
+    const particularComment = Comments.filter(
+      (item) => item.productId === req.params.id
+    );
+    res.status(200).json({ status: "ok", data: particularComment });
+  } catch (error) {
+    next(error);
+  }
+};

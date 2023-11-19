@@ -24,7 +24,7 @@ export const createProducts = async (data) => {
 export const getAllProducts = async () => {
   try {
     const response = await fetch("http://localhost:4000/product/getProducts", {
-      method: "POST",
+      method: "GET",
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const getProductByID = async (id) => {
     const response = await fetch(
       `http://localhost:4000/product/getProducts/${id}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",

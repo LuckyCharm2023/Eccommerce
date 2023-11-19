@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import { registerUser } from "@/controller/auth";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 export default function Register() {
   const [formDatas, setformDatas] = useState({
@@ -28,8 +29,8 @@ export default function Register() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     const imgSize = file?.size;
-    if (imgSize > 50000) {
-      toast.error("Image Size should be below 50kb");
+    if (imgSize > 70000) {
+      toast.error("Image Size should be below 70kb");
       setglower("fileRed");
     } else {
       setglower("");
@@ -200,6 +201,7 @@ export default function Register() {
         >
           Create account
         </Button>
+        <Link href="/auth/login">Already have account?</Link>
       </form>
     </Container>
   );

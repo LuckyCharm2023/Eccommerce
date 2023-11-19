@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
 export default function CommentCart({ data }) {
+  // console.log(data);
   return (
     <Stack
       sx={{
@@ -24,13 +25,18 @@ export default function CommentCart({ data }) {
       >
         <img
           style={{ height: "30px", width: "30px", borderRadius: "50%" }}
-          src={data?.image?.url}
+          src={data?.image}
           alt="productImg"
         />
-        <Typography>{data?.title}</Typography>
+        <Typography>{data?.name}</Typography>
       </Box>
-      <Rating name="read-only" value={3} size="small" readOnly />
-      <Typography fontSize="small">{data?.title}</Typography>
+      <Rating
+        name="read-only"
+        value={parseInt(data?.rating, 10)}
+        size="small"
+        readOnly
+      />
+      <Typography fontSize="small">{data?.comment}</Typography>
     </Stack>
   );
 }
