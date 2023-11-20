@@ -100,8 +100,8 @@ export default function About() {
     <Layout>
       <Toaster />
       <LoginModal open={open} close={setopen} />
-      <div className="flex flex-row justify-between w-full p-5  ">
-        <div className=" w-[50%] flex flex-col items-center gap-10 bg-white rounded-3xl p-5 sticky top-5">
+      <div className="flex flex-col md:flex-row justify-between w-full md:p-5  ">
+        <div className=" w-full md:w-[50%] flex flex-col items-center gap-10 bg-white rounded-3xl p-5 md:sticky md:top-5">
           <div
             className="flex flex-row w-full justify-start"
             onClick={() => {
@@ -110,50 +110,50 @@ export default function About() {
           >
             <IoMdArrowBack className="text-2xl font-medium cursor-pointer" />
           </div>
-          <div className="flex flex-col items-center w-64 gap-3 ">
+          <div className="flex flex-col items-center w-36 md:w-64 gap-3 ">
             <img
               src={product?.image?.url}
               alt="productImg"
               className="w-full flex "
             />
-            <div className="text-2xl font-medium ">{product?.title}</div>
+            <div className="text-xl md:text-2xl font-medium ">{product?.title}</div>
           </div>
           <div className="flex flex-row w-full justify-around items-center ">
-            <button className="bg-orange-400 text-white  w-40 h-14 text-xl font-semibold rounded-3xl">
+            <button className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
               Add to Cart
             </button>
-            <button className="bg-orange-400 text-white  w-40 h-14 text-xl font-semibold rounded-3xl">
+            <button className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
               Buy now
             </button>
           </div>
         </div>
-        <div className="flex flex-col w-[50%] p-5 ">
+        <div className="flex flex-col w-full md:w-[50%] p-5 ">
           <div>
             <div className="text-3xl font-medium">{product.title}</div>
-            <div className="text-md text-blue-500">Visit the Store</div>
-            <div className="text-md gap-1 flex flex-row">
+            <div className="text-sm md:text-md text-blue-500">Visit the Store</div>
+            <div className="text-sm md:text-md gap-1 flex flex-row">
               <span className="font-semibold">Shopify</span>Choice
             </div>
             <div className="flex flex-row items-center gap-2 mb-2">
               <div className="flex flex-row gap-1 items-center">
-                <span className="text-xl">{product.rating}</span>
-                <IoStar className="text-md text-orange-500 " />
+                <span className="text-md md:text-xl">{product.rating}</span>
+                <IoStar className="text-sm md:text-md text-orange-500 " />
               </div>
-              <span className="text-md">Ratings & Reviews</span>
+              <span className="text-sm md:text-md">Ratings & Reviews</span>
             </div>
             <div className="flex flex-col border-y-2 border-[#BBBFBF] mb-3 gap-1">
-              <div className="flex flex-row gap-1 items-center">
-                <div><MdCurrencyRupee className="text-md" /></div>
-                <span className="text-2xl font-semibold mt-3">
+              <div className="flex flex-row  items-center">
+                <div><MdCurrencyRupee className="text-md mt-2" /></div>
+                <span className="text-xl md:text-2xl font-semibold mt-3">
                   {product.price}
                 </span>
               </div>
-              <span className="text-md font-semibold ">
+              <span className="text-sm md:text-md font-semibold ">
                 Inclusive of all taxes
               </span>
               <div className="flex flex-row gap-2 mb-2">
-                <div className="text-md  "> No Cost EMI available</div>
-                <div className="text-md font-semibold text-blue-500">
+                <div className="text-sm md:text-md  "> No Cost EMI available</div>
+                <div className="text-sm md:text-md font-semibold text-blue-500">
                   {" "}
                   EMI Options
                 </div>
@@ -161,8 +161,8 @@ export default function About() {
             </div>
             <div className=" w-full gap-2 flex flex-col">
               <div className="text-xl font-semibold">Specfications:-</div>
-              <div className="flex flex-row pl-5 w-full">
-                <div className="flex flex-col gap-1 text-md font-semibold w-[20%] ">
+              <div className="flex flex-row pl-2 gap-2 md:pl-5 w-full">
+                <div className="flex flex-col gap-1 text-sm md:text-md font-semibold w-[30%] md:w-[20%] ">
                   <div>Brand </div>
                   <div>Model </div>
                   <div>Display </div>
@@ -174,7 +174,7 @@ export default function About() {
                   <div>Battery </div>
                   <div>Description </div>
                 </div>
-                <div className="flex flex-col gap-1 text-md font-medium  w-[80%]">
+                <div className="flex flex-col gap-1 text-sm md:text-md font-medium  w-[70%] md:w-[80%]">
                   <div>{product?.title}</div>
                   <div>{product?.spec?.model}</div>
                   <div className="flex flex-row gap-1 items-center">
