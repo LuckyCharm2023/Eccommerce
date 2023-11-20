@@ -11,6 +11,8 @@ import { registerUser } from "@/controller/auth";
 import Typography from "@mui/material/Typography";
 import SpecsDatasModal from "@/components/admin/SpecsDatasModel";
 import { createProducts } from "@/controller/products";
+import { Gradient } from "@mui/icons-material";
+import { IoImagesSharp } from "react-icons/io5";
 
 export default function AddProducts() {
   const [specsDatas, setspecsDatas] = useState({
@@ -132,13 +134,15 @@ export default function AddProducts() {
   const [specsErr, setspecsErr] = useState(false);
   const [open, setopen] = useState(false);
   return (
-    <Container
+    <Box
       sx={{
         width: "100%",
         height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        background:"linear-gradient(to bottom right ,#f09f53a2, #6bf3f8a6 )"
+
       }}
     >
       <SpecsDatasModal
@@ -152,9 +156,13 @@ export default function AddProducts() {
         style={{
           display: "flex",
           alignItems: "center",
-          flexDirection: "column",
           gap: "10px",
+          marginTop:"30px",
+            // background:"green",
+            padding:"10px"
+
         }}
+        className="flex flex-col md:flex-row"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Box
@@ -163,6 +171,8 @@ export default function AddProducts() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            bgcolor:"white",
+            borderRadius:"20px"
           }}
         >
           {formDatas.image ? (
@@ -170,17 +180,20 @@ export default function AddProducts() {
               style={{ position: "relative" }}
               alt="loading..."
               src={formDatas.image}
+              className="w-40 p-5 "
             />
           ) : (
-            <Image
-              alt="loading..."
-              src={require("../../public/image/dp.jpg")}
-              priority
-            />
+            <IoImagesSharp className="text-9xl text-slate-400 h-52"  />
           )}
-          <input type="file" onChange={handleImageUpload} accept="image/" />
+            
+          <input type="file" onChange={handleImageUpload} accept="image/" className="p-5"/>
         </Box>
 
+        <Box  style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap:"10px"}}>
         {inputField.map((elem, index) => {
           return (
             <div key={index}>
@@ -234,7 +247,8 @@ export default function AddProducts() {
         >
           Create
         </Button>
+        </Box>
       </form>
-    </Container>
+    </Box>
   );
 }
