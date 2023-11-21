@@ -1,5 +1,4 @@
 import CommentCart from "@/components/pages/about/CommentCart";
-import ProductCard from "@/components/pages/about/productCard";
 import { getproduct, getProductByID } from "@/controller/products";
 import Layout from "@/layout/Layout";
 import TextField from "@mui/material/TextField";
