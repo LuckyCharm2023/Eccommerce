@@ -304,10 +304,14 @@ export default function About() {
               </div>
             </div>
             <div className="flex flex-row w-full justify-around items-center ">
-              <button className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+              <button onClick={() => {
+                  toast.error("COMMING SOON...");
+                }} className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
                 Add to Cart
               </button>
-              <button className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+              <button onClick={() => {
+                  toast.error("COMMING SOON...");
+                }} className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
                 Buy now
               </button>
             </div>
