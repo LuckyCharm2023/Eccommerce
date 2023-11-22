@@ -141,8 +141,7 @@ export default function AddProducts() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:"linear-gradient(to bottom right ,#f09f53a2, #6bf3f8a6 )"
-
+        background: "linear-gradient(to bottom right ,#f09f53a2, #6bf3f8a6 )",
       }}
     >
       <SpecsDatasModal
@@ -157,10 +156,9 @@ export default function AddProducts() {
           display: "flex",
           alignItems: "center",
           gap: "10px",
-          marginTop:"30px",
-            // background:"green",
-            padding:"10px"
-
+          marginTop: "30px",
+          // background:"green",
+          padding: "10px",
         }}
         className="flex flex-col md:flex-row"
         onSubmit={handleSubmit(onSubmit)}
@@ -171,8 +169,8 @@ export default function AddProducts() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            bgcolor:"white",
-            borderRadius:"20px"
+            bgcolor: "white",
+            borderRadius: "20px",
           }}
         >
           {formDatas.image ? (
@@ -183,70 +181,78 @@ export default function AddProducts() {
               className="w-40 p-5 "
             />
           ) : (
-            <IoImagesSharp className="text-9xl text-slate-400 h-52"  />
+            <IoImagesSharp className="text-9xl text-slate-400 h-52" />
           )}
-            
-          <input type="file" onChange={handleImageUpload} accept="image/" className="p-5"/>
+
+          <input
+            type="file"
+            onChange={handleImageUpload}
+            accept="image/"
+            className="p-5"
+          />
         </Box>
 
-        <Box  style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap:"10px"}}>
-        {inputField.map((elem, index) => {
-          return (
-            <div key={index}>
-              <TextField
-                sx={{ width: "300px" }}
-                {...register(elem.name, {
-                  required: !elem.value ? elem.required : false,
-                })}
-                name={elem.name}
-                label={elem.label}
-                value={elem.value}
-                onChange={elem.onchange}
-                type={elem.type}
-              />
-              {elem.isErr && (
-                <FormHelperText sx={{ color: "red" }}>
-                  {elem.required}
-                </FormHelperText>
-              )}
-            </div>
-          );
-        })}
-        <Button
-          onClick={() => {
-            setopen(true);
-          }}
-          variant="outlined"
-        >
-          Add Specifications
-        </Button>
-        {specsErr && (
-          <FormHelperText sx={{ color: "red" }}>
-            Specification is required
-          </FormHelperText>
-        )}
-        <Button
-          sx={{
-            "&.MuiButtonBase-root": {
-              backgroundColor: "indigo",
-            },
-          }}
-          variant="contained"
-          type="submit"
-          onClick={() => {
-            if (formDatas.spec.model == "") {
-              setspecsErr(true);
-            } else {
-              setspecsErr(false);
-            }
+        <Box
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            gap: "10px",
           }}
         >
-          Create
-        </Button>
+          {inputField.map((elem, index) => {
+            return (
+              <div key={index}>
+                <TextField
+                  sx={{ width: "300px" }}
+                  {...register(elem.name, {
+                    required: !elem.value ? elem.required : false,
+                  })}
+                  name={elem.name}
+                  label={elem.label}
+                  value={elem.value}
+                  onChange={elem.onchange}
+                  type={elem.type}
+                />
+                {elem.isErr && (
+                  <FormHelperText sx={{ color: "red" }}>
+                    {elem.required}
+                  </FormHelperText>
+                )}
+              </div>
+            );
+          })}
+          <Button
+            onClick={() => {
+              setopen(true);
+            }}
+            variant="outlined"
+          >
+            Add Specifications
+          </Button>
+          {specsErr && (
+            <FormHelperText sx={{ color: "red" }}>
+              Specification is required
+            </FormHelperText>
+          )}
+          <Button
+            sx={{
+              "&.MuiButtonBase-root": {
+                backgroundColor: "indigo",
+              },
+            }}
+            variant="contained"
+            type="submit"
+            onClick={() => {
+              if (formDatas.spec.model == "") {
+                setspecsErr(true);
+              } else {
+                setspecsErr(false);
+              }
+            }}
+          >
+            Create
+          </Button>
         </Box>
       </form>
     </Box>

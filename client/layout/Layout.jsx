@@ -1,11 +1,13 @@
-import Navbar from "@/components/navbar/Navbar";
+import TopBar from "@/components/TopBar";
+import Footer from "@/components/navbar/Footer";
 import React from "react";
 
 export default function Layout({ children }) {
   return (
     <>
-      <Navbar />
+      <TopBar />
       {children}
+      <Footer />
     </>
   );
 }

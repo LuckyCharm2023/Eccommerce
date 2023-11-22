@@ -100,37 +100,61 @@ export default function About() {
     <Layout>
       <Toaster />
       <LoginModal open={open} close={setopen} />
-      <div className="flex flex-col md:flex-row justify-between w-full md:p-5  ">
+      <div className="flex flex-col md:flex-row justify-between w-full md:p-5  -z-50">
         <div className=" w-full md:w-[50%] flex flex-col items-center gap-10 bg-white rounded-3xl p-5 md:sticky md:top-5">
-          <div
-            className="flex flex-row w-full justify-start"
-            onClick={() => {
-              router.push("/products/homePage");
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              position: "sticky",
+              top: "80px",
+              width: {
+                xl: "100%",
+                lg: "100%",
+                md: "100%",
+                sm: "100%",
+                xs: "100%",
+              },
+              alignItems: "center",
+              justifyContent: "space-between",
+              // bgcolor: "red",
             }}
           >
-            <IoMdArrowBack className="text-2xl font-medium cursor-pointer" />
-          </div>
-          <div className="flex flex-col items-center w-36 md:w-64 gap-3 ">
-            <img
-              src={product?.image?.url}
-              alt="productImg"
-              className="w-full flex "
-            />
-            <div className="text-xl md:text-2xl font-medium ">{product?.title}</div>
-          </div>
-          <div className="flex flex-row w-full justify-around items-center ">
-            <button className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
-              Add to Cart
-            </button>
-            <button className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
-              Buy now
-            </button>
-          </div>
+            <div
+              className="flex flex-row w-full justify-start"
+              onClick={() => {
+                router.push("/products/homePage");
+              }}
+            >
+              <IoMdArrowBack className="text-2xl font-medium cursor-pointer" />
+            </div>
+            <div className="flex flex-col items-center w-36 md:w-64 gap-3 ">
+              <img
+                src={product?.image?.url}
+                alt="productImg"
+                className="w-full flex "
+              />
+              <div className="text-xl md:text-2xl font-medium ">
+                {product?.title}
+              </div>
+            </div>
+            <div className="flex flex-row w-full justify-around items-center ">
+              <button className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+                Add to Cart
+              </button>
+              <button className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+                Buy now
+              </button>
+            </div>
+          </Box>
         </div>
         <div className="flex flex-col w-full md:w-[50%] p-5 ">
           <div>
             <div className="text-3xl font-medium">{product.title}</div>
-            <div className="text-sm md:text-md text-blue-500">Visit the Store</div>
+            <div className="text-xl font-medium">{product?.spec?.model}</div>
+            <div className="text-sm md:text-md text-blue-500">
+              Visit the Store
+            </div>
             <div className="text-sm md:text-md gap-1 flex flex-row">
               <span className="font-semibold">Shopify</span>Choice
             </div>
@@ -143,7 +167,9 @@ export default function About() {
             </div>
             <div className="flex flex-col border-y-2 border-[#BBBFBF] mb-3 gap-1">
               <div className="flex flex-row  items-center">
-                <div><MdCurrencyRupee className="text-md mt-2" /></div>
+                <div>
+                  <MdCurrencyRupee className="text-md mt-2" />
+                </div>
                 <span className="text-xl md:text-2xl font-semibold mt-3">
                   {product.price}
                 </span>
@@ -152,7 +178,10 @@ export default function About() {
                 Inclusive of all taxes
               </span>
               <div className="flex flex-row gap-2 mb-2">
-                <div className="text-sm md:text-md  "> No Cost EMI available</div>
+                <div className="text-sm md:text-md  ">
+                  {" "}
+                  No Cost EMI available
+                </div>
                 <div className="text-sm md:text-md font-semibold text-blue-500">
                   {" "}
                   EMI Options
@@ -162,52 +191,99 @@ export default function About() {
             <div className=" w-full gap-2 flex flex-col">
               <div className="text-xl font-semibold">Specfications:-</div>
               <div className="flex flex-row pl-2 gap-2 md:pl-5 w-full">
-                <div className="flex flex-col gap-1 text-sm md:text-md font-semibold w-[30%] md:w-[20%] ">
-                  <div>Brand </div>
-                  <div>Model </div>
-                  <div>Display </div>
-                  <div>RAM </div>
-                  <div>Storage </div>
-                  <div>Processer </div>
-                  <div>Front-Camera </div>
-                  <div>Rear-Camera </div>
-                  <div>Battery </div>
-                  <div>Description </div>
+                <div className="flex flex-col gap-1 text-sm md:text-md  w-[30%] md:w-[20%]">
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">Brand </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">Model </div>
+                  </div>{" "}
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <div className="font-bold">Display </div>{" "}
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">RAM </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">Storage </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">Processer </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <div className="font-bold">Front-Camera </div>{" "}
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <div className="font-bold">Rear-Camera </div>{" "}
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-bold">Battery </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <div className="font-bold">Description </div>{" "}
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1 text-sm md:text-md font-medium  w-[70%] md:w-[80%]">
-                  <div>{product?.title}</div>
-                  <div>{product?.spec?.model}</div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.display}</span>
-                    <div>display</div>
+                <div className="flex flex-col gap-1 text-sm md:text-md  w-[70%] md:w-[80%] ">
+                  <div className="flex flex-row gap-4">
+                    <div className="font-base">{product?.title}</div>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.ram}</span>
-                    <div>GB RAM</div>
+                  <div className="flex flex-row gap-4">
+                    <div className="font-base">{product?.spec?.model}</div>
+                  </div>{" "}
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <div>
+                      <span className="font-base">
+                        {product?.spec?.display}
+                      </span>{" "}
+                      display
+                    </div>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.storage}</span>
-                    <div>GB ROM</div>
+                  <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-1 items-center">
+                      <span className="font-base">{product?.spec?.ram}</span>
+                      <div>GB RAM</div>
+                    </div>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.processer}</span>
-                    <div>Processor</div>
+                  <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-1 items-center">
+                      <span className="font-base">
+                        {product?.spec?.storage}
+                      </span>
+                      <div>GB ROM</div>
+                    </div>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.frontCam}</span>
-                    <div>MP | 4k 60fps</div>
+                  <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-1 items-center">
+                      <span className="font-base">
+                        {product?.spec?.processer}
+                      </span>
+                      <div>Processor</div>
+                    </div>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.rearCam}</span>
-                    <div>MP | 4k 60fps</div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <span className="font-base">{product?.spec?.frontCam}</span>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.spec?.battery}</span>
-                    <div>mAH</div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <span className="font-base">{product?.spec?.rearCam}</span>
                   </div>
-                  <div className="flex flex-row gap-1 items-center">
-                    <span>{product?.description}</span>
-                    <div></div>
+                  <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-1 items-center">
+                      <span className="font-base">
+                        {product?.spec?.battery}
+                      </span>
+                      <div>mAH</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    {" "}
+                    <span className="font-base">{product?.description}</span>
                   </div>
                 </div>
               </div>

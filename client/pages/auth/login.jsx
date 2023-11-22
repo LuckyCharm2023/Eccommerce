@@ -60,15 +60,7 @@ export default function Login() {
     });
   };
   return (
-    <Container
-      sx={{
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="w-full min-h-screen items-center justify-center">
       <Toaster position="top-center" />
       <form
         style={{
@@ -79,6 +71,13 @@ export default function Login() {
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
+        <Typography
+          variant="p"
+          color="initial"
+          sx={{ fontFamily: "serif", fontWeight: "600", fontSize: "25px" }}
+        >
+          Login
+        </Typography>
         {inputField.map((elem, index) => {
           return (
             <div key={index}>
@@ -113,8 +112,10 @@ export default function Login() {
         >
           Login
         </Button>
-        <Link href="/auth/register">Don't have account?</Link>
+        <Typography sx={{ fontFamily: "serif" }}>
+          <Link href="/auth/register">Don't have account?</Link>
+        </Typography>
       </form>
-    </Container>
+    </div>
   );
 }

@@ -13,6 +13,10 @@ import Avatar from "@mui/material/Avatar";
 import Cookies from "js-cookie";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { logout } from "@/controller/auth";
+import Image from "next/image";
+import { Anton } from "next/font/google";
+import Profile from "@/pages/auth/profile";
+const inter = Anton({ subsets: ["latin"], weight: ["400"] });
 
 export default function TopBar() {
   const router = useRouter();
@@ -20,6 +24,7 @@ export default function TopBar() {
   const userData = data ? JSON.parse(data) : null;
   // console.log(userData, "ERR");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -66,52 +71,73 @@ export default function TopBar() {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <ShoppingCartIcon />
-          </IconButton>
+    <Box sx={{ width: "100%", position: "sticky", top: "0px", zIndex: "1111" }}>
+      <AppBar position="sticky">
+        <Toolbar
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div className="flex flex-row m-2 bg-white px-2 md:px-8 rounded-md md:rounded-lg items-center font-medium text-md md:text-xl text-gray-500  ">
+            <Image
+              src={require("../src/assests/logo.png")}
+              className="w-10 md:w-11  py-1 "
+            />
+            <div className={inter.className}>Shopify</div>
+          </div>
+          <Box>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
 
-          {userData ? (
-            <Button
-              size="small"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              startIcon={
-                <Avatar
-                  sx={{ width: 35, height: 35 }}
-                  src={userData?.image?.url}
-                />
-              }
-              endIcon={<KeyboardArrowDown />}
-              variant="outlined"
-            >
-              {userData?.uname}
-            </Button>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={() => {
-                router.push("/auth/login");
-              }}
-            >
-              Login
-            </Button>
-          )}
+            {userData ? (
+              <Button
+                size="small"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={() => {
+                  setOpen(true);
+                }}
+                color="inherit"
+                startIcon={
+                  <Avatar
+                    sx={{
+                      width: 35,
+                      height: 35,
+                      backgroundColor: "#fff",
+                      padding: "3px",
+                    }}
+                    src={userData?.image?.url}
+                  />
+                }
+                endIcon={<KeyboardArrowDown />}
+                variant="outlined"
+              >
+                {userData?.uname}
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={() => {
+                  router.push("/auth/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
+          </Box>
+          {open && <Profile open={open} setOpen={setOpen} />}
 
           {renderMenu}
         </Toolbar>

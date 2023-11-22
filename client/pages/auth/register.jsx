@@ -10,6 +10,7 @@ import Image from "next/image";
 import { registerUser } from "@/controller/auth";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function Register() {
   const [formDatas, setformDatas] = useState({
@@ -99,13 +100,15 @@ export default function Register() {
     });
   };
   return (
-    <Container
+    <Box
       sx={{
         width: "100%",
         height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        bgcolor: "white",
+        // background: "linear-gradient(to right, #fe6b8b,  #ff8e53)",
       }}
     >
       <Toaster position="top-center" />
@@ -124,8 +127,16 @@ export default function Register() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            gap: "5px",
           }}
         >
+          <Typography
+            variant="p"
+            color="initial"
+            sx={{ fontFamily: "serif", fontWeight: "600", fontSize: "25px" }}
+          >
+            Create Account
+          </Typography>
           {formDatas.image ? (
             <img
               style={{ position: "relative" }}
@@ -133,11 +144,9 @@ export default function Register() {
               src={formDatas.image}
             />
           ) : (
-            <Image
-              alt="loading..."
-              src={require("../../public/image/dp.jpg")}
-              priority
-            />
+            <div>
+              <FaUserCircle className="text-9xl text-neutral-300 " />
+            </div>
           )}
 
           <input type="file" onChange={handleImageUpload} accept="image/" />
@@ -147,9 +156,10 @@ export default function Register() {
             width: "100%",
             display: "flex",
             alignItems: "center",
+            gap: "5px",
           }}
         >
-          <Typography variant="p" color="initial">
+          <Typography variant="p" color="initial" sx={{ fontFamily: "serif" }}>
             Register as :
           </Typography>
           <TextField
@@ -166,6 +176,7 @@ export default function Register() {
               },
             }}
           />
+          <Typography sx={{ fontFamily: "serif" }}>Admin</Typography>
         </Box>
         {inputField.map((elem, index) => {
           return (
@@ -201,8 +212,10 @@ export default function Register() {
         >
           Create account
         </Button>
-        <Link href="/auth/login">Already have account?</Link>
+        <Typography sx={{ fontFamily: "serif" }}>
+          <Link href="/auth/login">Already have account?</Link>
+        </Typography>
       </form>
-    </Container>
+    </Box>
   );
 }
