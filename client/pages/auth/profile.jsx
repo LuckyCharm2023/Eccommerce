@@ -11,6 +11,7 @@ function Profile({ open, setOpen }) {
   return (
     <>
       <Modal
+        onClose={()=>{setOpen(false)}}
         open={open}
         className="flex flex-row justify-end backdrop-blur-sm w-full"
       >
