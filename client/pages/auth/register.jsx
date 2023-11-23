@@ -88,14 +88,14 @@ export default function Register() {
     },
   ];
   const onSubmit = async () => {
-    console.log(errors, "ERR");
-    console.log(formDatas, "Form");
+    // console.log(errors, "ERR");
+    // console.log(formDatas, "Form");
     await registerUser(formDatas);
     setformDatas({
       email: "",
       password: "",
       uname: "",
-      userType: "",
+      userType: "user",
       image: "",
     });
   };
@@ -151,7 +151,7 @@ export default function Register() {
 
           <input type="file" onChange={handleImageUpload} accept="image/" />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             width: "100%",
             display: "flex",
@@ -177,7 +177,7 @@ export default function Register() {
             }}
           />
           <Typography sx={{ fontFamily: "serif" }}>Admin</Typography>
-        </Box>
+        </Box> */}
         {inputField.map((elem, index) => {
           return (
             <div key={index}>
