@@ -1,6 +1,8 @@
+import { getAllComments, getComments } from "@/controller/comment";
 import { getAllProducts } from "@/controller/products";
 import Layout from "@/layout/Layout";
 import { useRouter } from "next/router";
+import { comment } from "postcss";
 import React, { useEffect, useState } from "react";
 import { FaTruck } from "react-icons/fa";
 import { MdCurrencyRupee } from "react-icons/md";
@@ -9,15 +11,32 @@ import { MdOutlineStar } from "react-icons/md";
 export default function Homepage() {
   const router = useRouter();
   const [allProducts, setAllProducts] = useState([]);
+  const [allComments, setallComments] = useState([]);
+  const [comments, setcomments] = useState([]);
   useEffect(() => {
-    getAllProducts().then((res) => setAllProducts(res));
+    getAllProducts().then((res) => {
+      setAllProducts(res);
+    });
+    getAllComments().then((res) => {
+      setallComments(res);
+    });
   }, []);
+  const productComments = allProducts.map((product) => {
+    const productComments = allComments
+      .filter((comment) => comment.productId === product._id)
+      .map((comment) => comment.rating)
+      .reduce((acc, rating) => acc + Number(rating), 0);
 
+    return {
+      ...product,
+      commentsRating: productComments,
+    };
+  });
   return (
     <>
       <Layout>
         <div className="flex flex-col p-0 md:p-3 bg-white w-full gap-3">
-          {allProducts?.map((item) => {
+          {productComments?.map((item) => {
             return (
               <div
                 key={item._id}
@@ -47,7 +66,9 @@ export default function Homepage() {
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm md:text-md  px-2 py-1">
                     <div className="flex flex-row items-center">
-                      <div className=" font-medium text-md">{item.rating}</div>
+                      <div className=" font-medium text-md">
+                        {item.commentsRating}
+                      </div>
                       <MdOutlineStar className="text-orange-500 text-xl " />
                     </div>
                     <div className="text-md">Ratings & Reviews</div>
