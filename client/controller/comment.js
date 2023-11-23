@@ -35,6 +35,22 @@ export const getComments = async (productID) => {
     console.log(error);
   }
 };
+export const getAllComments = async () => {
+  try {
+    const response = await fetch(comment_Api + `/getComments`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }).then((res) => res.json());
+    // console.log(response.data, "AllComments");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const updateComments = async (id, data) => {
   try {
     const response = await fetch(comment_Api + `/updateComment/${id}`, {
