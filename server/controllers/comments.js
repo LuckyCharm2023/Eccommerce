@@ -27,6 +27,22 @@ exports.getComment = async (req, res, next) => {
     next(error);
   }
 };
+export const getAllComments = async () => {
+  try {
+    const response = await fetch(`http://localhost:4000/comment/getComments`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }).then((res) => res.json());
+    // console.log(response.data, "AllComments");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 exports.updateComment = async (req, res, next) => {
   try {
     await Comment.findByIdAndUpdate(req.params.id, req.body, {
