@@ -18,9 +18,18 @@ import { Avatar, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 const inter = Anton({ subsets: ["latin"], weight: ["400"] });
 
-export default function TopBar({ auth, userData }) {
+export default function TopBar() {
+  const [userData, setuserData] = useState({});
+  const [auth, setauth] = useState(false);
+  const data = Cookies.get("userData");
   const router = useRouter();
-
+  useEffect(() => {
+    const DATA = data ? JSON.parse(data) : null;
+    if (DATA !== null) {
+      setuserData(DATA);
+      setauth(true);
+    }
+  }, [data, router.pathname]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = useState(false);
   const isMenuOpen = Boolean(anchorEl);

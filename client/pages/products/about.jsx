@@ -19,7 +19,7 @@ import {
   updateComments,
 } from "@/controller/comment";
 import toast, { Toaster } from "react-hot-toast";
-import { getAllUser, userDatas } from "@/controller/auth";
+import { getAllUser } from "@/controller/auth";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
 import { MdCurrencyRupee } from "react-icons/md";
@@ -27,11 +27,12 @@ import { FaBoxOpen } from "react-icons/fa";
 import { FaTruck } from "react-icons/fa";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { HiMiniTrophy } from "react-icons/hi2";
-import { Chip } from "@mui/material";
+import { Chip, Skeleton } from "@mui/material";
 
 export default function About() {
+  const [isLoading, setisLoading] = useState(false);
   const data = Cookies.get("userData");
-  const userData = data ? JSON.parse(data) : null;
+  const userData = data && data !== undefined ? JSON.parse(data) : false;
   const [product, setproduct] = useState({});
   const [comments, setcomments] = useState([]);
   const [allUsers, setallUsers] = useState([]);
@@ -47,11 +48,6 @@ export default function About() {
     0
   );
   useEffect(() => {
-    userDatas().then((data) => {
-      if (data !== "token expired") {
-        Cookies.set("userData", JSON.stringify(data));
-      }
-    });
     if (totalRating < 10) {
       setreviewStatus({
         lable: "POOR",
@@ -102,10 +98,12 @@ export default function About() {
   }, [totalRating]);
 
   const getAllDatas = () => {
+    setisLoading(true);
     if (router?.query.id) {
       getProductByID(router?.query.id).then((res) => {
         setproduct(res);
         if (res) {
+          setisLoading(false);
           setproductID(res._id);
           getComments(res?._id).then((data) => setcomments(data));
         }
@@ -294,24 +292,41 @@ export default function About() {
               <IoMdArrowBack className="text-2xl font-medium cursor-pointer" />
             </div>
             <div className="flex flex-col items-center w-36 md:w-64 gap-3 ">
-              <img
-                src={product?.image?.url}
-                alt="productImg"
-                className="w-full flex "
-              />
+              {isLoading ? (
+                <Skeleton
+                  variant="rectangular"
+                  className="w-[100%]"
+                  sx={{
+                    borderRadius: "10px",
+                    height: { md: "400px", sm: "300px", xs: "300px" },
+                  }}
+                />
+              ) : (
+                <img
+                  src={product?.image?.url}
+                  alt="productImg"
+                  className="w-full flex "
+                />
+              )}
               <div className="text-xl md:text-2xl font-medium ">
                 {product?.title}
               </div>
             </div>
             <div className="flex flex-row w-full justify-around items-center ">
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   toast.error("COMMING SOON...");
-                }} className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+                }}
+                className="bg-orange-400 text-white w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl"
+              >
                 Add to Cart
               </button>
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   toast.error("COMMING SOON...");
-                }} className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl">
+                }}
+                className="bg-orange-400 text-white  w-32 h-10 md:w-40 md:h-14 text-md md:text-xl font-semibold rounded-3xl"
+              >
                 Buy now
               </button>
             </div>

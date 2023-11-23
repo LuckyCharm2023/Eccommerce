@@ -13,7 +13,7 @@ export const registerUser = async (data) => {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-    console.log(response, "User Registered");
+    // console.log(response, "User Registered");
     if (response.status === "ok") {
       toast.success("User Registered Successfully");
     }
@@ -36,6 +36,9 @@ export const loginUser = async (data) => {
     if (response.status == "ok") {
       toast.success("Login successful");
       EncryptCookie("token", response.data);
+      userDatas().then((data) => {
+        Cookies.set("userData", JSON.stringify(data));
+      });
     }
     if (response.error == "User not Exists") {
       toast.error("User not Exists");
@@ -68,7 +71,6 @@ export const userDatas = async () => {
       // Cookies.remove("token");
     }
 
-    console.log("LOGGED");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -84,7 +86,7 @@ export const getAllUser = async () => {
         "Access-Control-Allow-Origin": "*",
       },
     }).then((res) => res.json());
-    console.log(response.data, "ALLUsers");
+    // console.log(response.data, "ALLUsers");
     return response.data;
   } catch (error) {
     console.log(error);

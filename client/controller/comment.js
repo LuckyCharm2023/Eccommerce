@@ -11,7 +11,6 @@ export const createComment = async (data) => {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-    console.log(response, "Comment Added");
     if (response.status === "ok") {
       toast.success("Comment Added Successfully");
     }
@@ -29,7 +28,6 @@ export const getComments = async (productID) => {
         "Access-Control-Allow-Origin": "*",
       },
     }).then((res) => res.json());
-    console.log(response.data, "AllComments");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -62,7 +60,6 @@ export const updateComments = async (id, data) => {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-    console.log(response.status, "Updated");
 
     if (response.status == "ok") {
       toast.success("Updated Successfully");
@@ -82,7 +79,6 @@ export const deleteComments = async (id) => {
         "Access-Control-Allow-Origin": "*",
       },
     }).then((res) => res.json());
-    console.log(response.ststus, "Deleted");
     if (response.status == "ok") {
       toast.success("Deleted Successfully");
     }

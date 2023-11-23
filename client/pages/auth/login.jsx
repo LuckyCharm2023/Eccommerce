@@ -55,7 +55,7 @@ export default function Login() {
           email: "",
           password: "",
         });
-        window.location.href = "/userDetails";
+        window.location.href = "/";
       }
     });
   };

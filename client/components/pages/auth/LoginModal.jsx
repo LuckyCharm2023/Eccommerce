@@ -10,6 +10,7 @@ import Modal from "@mui/material/Modal";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function LoginModal({ open, close }) {
   const [formDatas, setformDatas] = useState({
@@ -49,6 +50,7 @@ export default function LoginModal({ open, close }) {
       isErr: errors.password,
     },
   ];
+  const router = useRouter();
   const onSubmit = async () => {
     await loginUser(formDatas).then((res) => {
       if (res.status === "ok") {
@@ -56,6 +58,7 @@ export default function LoginModal({ open, close }) {
           email: "",
           password: "",
         });
+        router.push("/");
         handleClose();
       }
     });

@@ -11,7 +11,7 @@ export const createProducts = async (data) => {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-    console.log(response, "Product Added");
+    // console.log(response, "Product Added");
     if (response.status === "ok") {
       toast.success("Products Added Successfully");
     }
@@ -28,7 +28,7 @@ export const getAllProducts = async () => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    console.log(response.data, "AllProduct");
+    // console.log(response.data, "AllProduct");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -43,7 +43,7 @@ export const getProductByID = async (id) => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    console.log(response.data, "Particular Product");
+    // console.log(response.data, "Particular Product");
     return response.data;
   } catch (error) {
     console.log(error);
