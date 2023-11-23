@@ -14,7 +14,7 @@ import { logout } from "@/controller/auth";
 import Image from "next/image";
 import { Anton } from "next/font/google";
 import Profile from "@/pages/auth/profile";
-import { Avatar } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 const inter = Anton({ subsets: ["latin"], weight: ["400"] });
 
@@ -102,43 +102,56 @@ export default function TopBar({ auth, userData }) {
               <ShoppingCartIcon />
             </IconButton>
 
-            <Button
-              sx={{ padding: "5px" }}
-              hidden={!auth}
-              size="small"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={() => {
-                setOpen(true);
-              }}
-              color="inherit"
-              endIcon={<KeyboardArrowDown />}
-              variant="outlined"
-              startIcon={
-                <Avatar
+            {auth ? (
+              <Button
+                title={userData ? userData.uname : "Username"}
+                sx={{
+                  padding: "5px",
+                }}
+                size="small"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={() => {
+                  setOpen(true);
+                }}
+                color="inherit"
+                endIcon={<KeyboardArrowDown />}
+                variant="outlined"
+                startIcon={
+                  <Avatar
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      boxShadow: "1px 1px 1px 1px gray",
+                    }}
+                    src={userData?.image?.url}
+                  />
+                }
+              >
+                <Typography
                   sx={{
-                    width: 30,
-                    height: 30,
-                    boxShadow: "1px 1px 1px 1px gray",
+                    overflow: "hidden",
+                    maxWidth: "70px",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   }}
-                  src={userData?.image?.url}
-                />
-              }
-            >
-              {userData ? userData.uname : "Username"}
-            </Button>
-
-            <Button
-              hidden={auth}
-              color="inherit"
-              onClick={() => {
-                router.push("/auth/login");
-              }}
-            >
-              Login
-            </Button>
+                  fontSize="10px"
+                >
+                  {userData ? userData.uname : "Username"}
+                </Typography>
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={() => {
+                  router.push("/auth/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Box>
           <>{open && <Profile open={open} setOpen={setOpen} />}</>
 
