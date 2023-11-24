@@ -36,10 +36,26 @@ export const loginUser = async (data) => {
     if (response.status == "ok") {
       toast.success("Login successful");
       removeAllCookies();
-      EncryptCookie("token", response.data);
-      userDatas().then((data) => {
-        Cookies.set("userData", JSON.stringify(data));
-      });
+      // EncryptCookie("token", response.data);
+      const UserResponse = await fetch(auth_Api + "/userData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          token: response.data,
+        }),
+      }).then((res) => res.json());
+
+      if (UserResponse.data.userType === "admin") {
+        window.location.href = "/admin/addProducts";
+      }
+      if (UserResponse.data == "token expired") {
+        toast.error("Token expired login again");
+        // Cookies.remove("token");
+      }
+      Cookies.set("authUserData", JSON.stringify(UserResponse.data));
     }
     if (response.error == "User not Exists") {
       toast.error("User not Exists");
@@ -52,33 +68,7 @@ export const loginUser = async (data) => {
     console.log(error);
   }
 };
-export const userDatas = async () => {
-  try {
-    const response = await fetch(auth_Api + "/userData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        token: Cookies.get("token"),
-      }),
-    }).then((res) => res.json());
-    if (response.data.userType === "admin") {
-      window.location.href = "/admin/addProducts";
-    } else {
-      window.location.href = "/";
-    }
-    if (response.data == "token expired") {
-      toast.error("Token expired login again");
-      // Cookies.remove("token");
-    }
 
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 export const getAllUser = async () => {
   try {
     const response = await fetch(auth_Api + "/getUsers", {

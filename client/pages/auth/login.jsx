@@ -60,7 +60,7 @@ export default function Login() {
     });
   };
   return (
-    <div className="w-full min-h-screen items-center justify-center">
+    <div className="w-full min-h-screen flex bg-[#1b1b1b] items-center justify-center">
       <Toaster position="top-center" />
       <form
         style={{
@@ -68,21 +68,47 @@ export default function Login() {
           alignItems: "center",
           flexDirection: "column",
           gap: "10px",
+          background: "#33333d",
+          padding: "10px",
+          borderRadius: "10px",
+          boxShadow: "0px 0px 1px 1px gray",
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
         <Typography
           variant="p"
-          color="initial"
-          sx={{ fontFamily: "serif", fontWeight: "600", fontSize: "25px" }}
+          sx={{
+            color: "skyblue",
+            fontFamily: "serif",
+            fontWeight: "600",
+            fontSize: "25px",
+          }}
         >
           Login
         </Typography>
+
         {inputField.map((elem, index) => {
           return (
             <div key={index}>
               <TextField
-                sx={{ width: "300px" }}
+                sx={{
+                  width: "300px",
+                  "& fieldset": {
+                    borderColor: "skyblue",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    borderColor: "lightblue",
+                  },
+                  "&:hover .MuiInputLabel-root": {
+                    color: "lightblue",
+                  },
+                  " & .MuiInputLabel-root": {
+                    color: "skyblue",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "lightblue",
+                  },
+                }}
                 {...register(elem.name, {
                   required: !elem.value ? elem.required : false,
                 })}
@@ -92,11 +118,6 @@ export default function Login() {
                 onChange={elem.onchange}
                 type={elem.type}
               />
-              {elem.isErr && (
-                <FormHelperText sx={{ color: "red" }}>
-                  {elem.required}
-                </FormHelperText>
-              )}
             </div>
           );
         })}
@@ -104,7 +125,8 @@ export default function Login() {
         <Button
           sx={{
             "&.MuiButtonBase-root": {
-              backgroundColor: "indigo",
+              backgroundColor: "lightblue",
+              color: "black",
             },
           }}
           variant="contained"
@@ -112,7 +134,7 @@ export default function Login() {
         >
           Login
         </Button>
-        <Typography sx={{ fontFamily: "serif" }}>
+        <Typography sx={{ fontFamily: "serif", color: "skyblue" }}>
           <Link href="/auth/register">Don't have account?</Link>
         </Typography>
       </form>

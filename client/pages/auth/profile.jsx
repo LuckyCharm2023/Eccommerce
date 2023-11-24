@@ -6,12 +6,14 @@ import { IoMdClose } from "react-icons/io";
 import "animate.css";
 
 function Profile({ open, setOpen }) {
-  const data = Cookies.get("userData");
+  const data = Cookies.get("authUserData");
   const userdata = data ? JSON.parse(data) : null;
   return (
     <>
       <Modal
-        onClose={()=>{setOpen(false)}}
+        onClose={() => {
+          setOpen(false);
+        }}
         open={open}
         className="flex flex-row justify-end backdrop-blur-sm w-full"
       >

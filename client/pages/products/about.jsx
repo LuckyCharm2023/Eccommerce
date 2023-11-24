@@ -31,7 +31,7 @@ import { Chip, Skeleton } from "@mui/material";
 
 export default function About() {
   const [isLoading, setisLoading] = useState(false);
-  const data = Cookies.get("userData");
+  const data = Cookies.get("authUserData");
   const userData = data && data !== undefined ? JSON.parse(data) : false;
   const [product, setproduct] = useState({});
   const [comments, setcomments] = useState([]);

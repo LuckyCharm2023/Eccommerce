@@ -21,7 +21,7 @@ const inter = Anton({ subsets: ["latin"], weight: ["400"] });
 export default function TopBar() {
   const [userData, setuserData] = useState({});
   const [auth, setauth] = useState(false);
-  const data = Cookies.get("userData");
+  const data = Cookies.get("authUserData");
   const router = useRouter();
   useEffect(() => {
     const DATA = data ? JSON.parse(data) : null;

@@ -107,7 +107,7 @@ export default function Register() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "white",
+        bgcolor: "#1b1b1b",
         // background: "linear-gradient(to right, #fe6b8b,  #ff8e53)",
       }}
     >
@@ -117,7 +117,11 @@ export default function Register() {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          gap: "10px",
+          gap: "15px",
+          background: "#33333d",
+          padding: "10px",
+          borderRadius: "10px",
+          boxShadow: "0px 0px 1px 1px gray",
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -132,14 +136,18 @@ export default function Register() {
         >
           <Typography
             variant="p"
-            color="initial"
-            sx={{ fontFamily: "serif", fontWeight: "600", fontSize: "25px" }}
+            sx={{
+              color: "skyblue",
+              fontFamily: "serif",
+              fontWeight: "600",
+              fontSize: "25px",
+            }}
           >
             Create Account
           </Typography>
           {formDatas.image ? (
             <img
-              style={{ position: "relative" }}
+              style={{ position: "relative", borderRadius: "50%" }}
               alt="loading..."
               src={formDatas.image}
             />
@@ -149,7 +157,12 @@ export default function Register() {
             </div>
           )}
 
-          <input type="file" onChange={handleImageUpload} accept="image/" />
+          <input
+            type="file"
+            onChange={handleImageUpload}
+            accept="image/"
+            style={{ color: "lightblue" }}
+          />
         </Box>
         {/* <Box
           sx={{
@@ -182,7 +195,27 @@ export default function Register() {
           return (
             <div key={index}>
               <TextField
-                sx={{ width: "300px" }}
+                sx={{
+                  width: "300px",
+                  "& fieldset": {
+                    borderColor: "skyblue",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    borderColor: "lightblue",
+                  },
+                  "&:hover .MuiInputLabel-root": {
+                    color: "lightblue",
+                  },
+                  " & .MuiInputLabel-root": {
+                    color: "skyblue",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "lightblue",
+                  },
+                  "&:not(.Mui-focused)": {
+                    backgroundColor: "transparent", // Set the background color when not focused
+                  },
+                }}
                 {...register(elem.name, {
                   required: !elem.value ? elem.required : false,
                 })}
@@ -204,7 +237,8 @@ export default function Register() {
         <Button
           sx={{
             "&.MuiButtonBase-root": {
-              backgroundColor: "indigo",
+              backgroundColor: "lightblue",
+              color: "black",
             },
           }}
           variant="contained"
@@ -212,7 +246,7 @@ export default function Register() {
         >
           Create account
         </Button>
-        <Typography sx={{ fontFamily: "serif" }}>
+        <Typography sx={{ fontFamily: "serif", color: "skyblue" }}>
           <Link href="/auth/login">Already have account?</Link>
         </Typography>
       </form>

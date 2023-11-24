@@ -58,7 +58,7 @@ export default function LoginModal({ open, close }) {
           email: "",
           password: "",
         });
-        router.push("/");
+        // router.push("/");
         handleClose();
       }
     });
