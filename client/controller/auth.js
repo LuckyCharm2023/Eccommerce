@@ -35,6 +35,7 @@ export const loginUser = async (data) => {
 
     if (response.status == "ok") {
       toast.success("Login successful");
+      removeAllCookies();
       EncryptCookie("token", response.data);
       userDatas().then((data) => {
         Cookies.set("userData", JSON.stringify(data));
@@ -65,6 +66,8 @@ export const userDatas = async () => {
     }).then((res) => res.json());
     if (response.data.userType === "admin") {
       window.location.href = "/admin/addProducts";
+    } else {
+      window.location.href = "/";
     }
     if (response.data == "token expired") {
       toast.error("Token expired login again");
@@ -95,5 +98,12 @@ export const getAllUser = async () => {
 export const logout = () => {
   Cookies.remove("token");
   Cookies.remove("userData");
+  removeAllCookies();
   window.location.href = "/";
+};
+export const removeAllCookies = () => {
+  const cookies = Object.keys(Cookies.get());
+  cookies.forEach((cookieName) => {
+    Cookies.remove(cookieName);
+  });
 };
