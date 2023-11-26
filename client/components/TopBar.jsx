@@ -18,7 +18,7 @@ import { Avatar, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 const inter = Anton({ subsets: ["latin"], weight: ["400"] });
 
-export default function TopBar() {
+export default function TopBar({isScolled}) {
   const [userData, setuserData] = useState({});
   const [auth, setauth] = useState(false);
   const data = Cookies.get("authUserData");
@@ -77,8 +77,10 @@ export default function TopBar() {
   );
 
   return (
-    <Box sx={{ width: "100%", position: "sticky", top: "0px", zIndex: "1111" }}>
-      <AppBar position="sticky">
+    <Box sx={{ width: "100%", position: "sticky", top: "0px", zIndex: "1111",display:"flex",justifyContent:"center",alignItems:"center" }}>
+      <AppBar position="sticky" sx={...(isScolled&&{
+width:"99%",borderRadius:"10px",marginTop:"5px"
+      })}>
         <Toolbar
           sx={{
             display: "flex",

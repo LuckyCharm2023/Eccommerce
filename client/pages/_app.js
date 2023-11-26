@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 export const ContextApi = createContext();
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const data = Cookies.get("authUserData");
