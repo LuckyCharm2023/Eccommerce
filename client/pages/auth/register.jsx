@@ -16,7 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 
 export default function Register() {
-  const [hide, sethide] = useState(false);
+  const [hide, sethide] = useState(true);
 
   const [formDatas, setformDatas] = useState({
     email: "",
