@@ -530,6 +530,22 @@ export default function About() {
                 </Button>
               )}
             </div>
+             {totalRating == 0 && (
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "gray",
+                  padding: "10px",
+                  background: "white",
+                  borderRadius: "8px",
+                }}
+              >
+                No Comments...
+              </Box>
+            )}
             {openCommentField && (
               <TextField
                 value={commentDatas.comment}
