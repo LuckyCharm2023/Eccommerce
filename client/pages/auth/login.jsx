@@ -29,7 +29,7 @@ export default function Login() {
     const { name, value } = event.target;
     setformDatas({ ...formDatas, [name]: value });
   };
-  const [hide, sethide] = useState(false);
+  const [hide, sethide] = useState(true);
   const inputField = [
     {
       label: "Email",
