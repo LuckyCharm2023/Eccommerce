@@ -43,7 +43,7 @@ export default function Homepage() {
         <div className="flex flex-col p-0 md:p-3 bg-white w-full gap-3">
           {!isLoading ? (
             <>
-              {productComments?.map((item) => {
+              {productComments?.reverse().map((item) => {
                 return (
                   <div
                     key={item._id}
