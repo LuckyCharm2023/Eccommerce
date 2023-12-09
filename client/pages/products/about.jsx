@@ -381,49 +381,49 @@ export default function About() {
               <div className="text-xl font-semibold">Specfications:-</div>
               <div className="flex flex-row pl-2 gap-2 md:pl-5 w-full">
                 <div className="flex flex-col gap-1 text-sm md:text-md  w-[30%] md:w-[20%]">
-                  {product?.title !== 0 && (
+                  {product?.title !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Brand </div>
                     </div>
                   )}
-                  {product?.spec?.model !== 0 && (
+                  {product?.spec?.model !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Model </div>
                     </div>
                   )}
-                  {product?.spec?.display !== 0 && (
+                  {product?.spec?.display !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Display </div>{" "}
                     </div>
                   )}
-                  {product?.spec?.ram !== 0 && (
+                  {product?.spec?.ram !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">RAM </div>
                     </div>
                   )}
-                  {product?.spec?.storage !== 0 && (
+                  {product?.spec?.storage !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Storage </div>
                     </div>
                   )}
-                  {product?.spec?.processerry !== 0 && (
+                  {product?.spec?.processerry !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Processer </div>
                     </div>
                   )}
-                  {product?.spec?.frontCam !== 0 && (
+                  {product?.spec?.frontCam !== "0" && (
                     <div className="flex flex-row gap-4">
                       {" "}
                       <div className="font-bold">Front-Camera </div>{" "}
                     </div>
                   )}
-                  {product?.spec?.rearCam !== 0 && (
+                  {product?.spec?.rearCam !== "0" && (
                     <div className="flex flex-row gap-4">
                       {" "}
                       <div className="font-bold">Rear-Camera </div>{" "}
                     </div>
                   )}
-                  {product?.spec?.battery !== 0 && (
+                  {product?.spec?.battery !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Battery </div>
                     </div>
@@ -434,17 +434,17 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 text-sm md:text-md  w-[70%] md:w-[80%] ">
-                  {product?.title !== 0 && (
+                  {product?.title !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-base">{product?.title}</div>
                     </div>
                   )}
-                  {product?.spec?.model !== 0 && (
+                  {product?.spec?.model !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-base">{product?.spec?.model}</div>
                     </div>
                   )}
-                  {product?.spec?.display !== 0 && (
+                  {product?.spec?.display !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div>
                         <span className="font-base">
@@ -454,7 +454,7 @@ export default function About() {
                       </div>
                     </div>
                   )}
-                  {product?.spec?.ram !== 0 && (
+                  {product?.spec?.ram !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="flex flex-row gap-1 items-center">
                         <span className="font-base">{product?.spec?.ram}</span>
@@ -462,7 +462,7 @@ export default function About() {
                       </div>
                     </div>
                   )}
-                  {product?.spec?.storage !== 0 && (
+                  {product?.spec?.storage !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="flex flex-row gap-1 items-center">
                         <span className="font-base">
@@ -472,7 +472,7 @@ export default function About() {
                       </div>
                     </div>
                   )}
-                  {product?.spec?.processer !== 0 && (
+                  {product?.spec?.processer !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="flex flex-row gap-1 items-center">
                         <span className="font-base">
@@ -482,7 +482,7 @@ export default function About() {
                       </div>
                     </div>
                   )}
-                  {product?.spec?.frontCam !== 0 && (
+                  {product?.spec?.frontCam !== "0" && (
                     <div className="flex flex-row gap-4">
                       {" "}
                       <span className="font-base">
@@ -490,7 +490,7 @@ export default function About() {
                       </span>
                     </div>
                   )}
-                  {product?.spec?.rearCam !== 0 && (
+                  {product?.spec?.rearCam !== "0" && (
                     <div className="flex flex-row gap-4">
                       {" "}
                       <span className="font-base">
@@ -498,7 +498,7 @@ export default function About() {
                       </span>
                     </div>
                   )}
-                  {product?.spec?.battery !== 0 && (
+                  {product?.spec?.battery !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="flex flex-row gap-1 items-center">
                         <span className="font-base">
