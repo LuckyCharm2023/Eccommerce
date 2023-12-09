@@ -406,7 +406,7 @@ export default function About() {
                       <div className="font-bold">Storage </div>
                     </div>
                   )}
-                  {product?.spec?.processerry !== "0" && (
+                  {product?.spec?.processer !== "0" && (
                     <div className="flex flex-row gap-4">
                       <div className="font-bold">Processer </div>
                     </div>
